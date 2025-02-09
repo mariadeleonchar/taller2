@@ -375,7 +375,7 @@ public class SandboxArreglos
     {
     	HashMap<Integer, Integer> frecuencia = new HashMap<>();
     	int count = 0;
-        for (int numero = 0; numero < arregloEnteros.length; numero++)
+        for (int numero : arregloEnteros)
         {
         	frecuencia.put(numero, frecuencia.getOrDefault(numero, 0) + 1);
         	{

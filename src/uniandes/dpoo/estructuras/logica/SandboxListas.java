@@ -139,9 +139,12 @@ public class SandboxListas
      */
     public void insertarEntero( int entero, int posicion )
     {
-    	if (posicion < 0 || posicion > listaEnteros.size())
+    	if (posicion < 0)
+    		{listaEnteros.add(0, entero);}
+    	else if (posicion >= listaEnteros.size())
     		{listaEnteros.addLast(entero);}
-    	listaEnteros.add(posicion, entero);
+    	else
+    		{listaEnteros.add(posicion, entero);}
     }
 
     /**
@@ -150,10 +153,9 @@ public class SandboxListas
      *        no debe hacer nada.
      */
     public void eliminarEnteroPorPosicion( int posicion )
-    {	if (listaEnteros == null) 
-    		{return;}
-    	if (posicion > 0 || posicion < listaEnteros.size())
-    		{listaEnteros.remove(posicion);}
+    {	if (listaEnteros == null || posicion < 0 || posicion >= listaEnteros.size()) 
+    	{return;}
+    	listaEnteros.remove(posicion);
     }
 
     /**

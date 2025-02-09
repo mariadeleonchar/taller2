@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -172,12 +173,12 @@ public class SandboxConjuntos
      * Note que esta operación podría modificar el órden de los elementos dentro del conjunto.
      */
     public void volverMayusculas( )
-    {
+    {	if (arbolCadenas == null || arbolCadenas.isEmpty()) 
+    	{return;}
     	TreeSet<String> nuevoConjunto = new TreeSet<>();
     	for (String cadena: arbolCadenas )
-    	{
-    		nuevoConjunto.add(cadena.toLowerCase());
-    	}
+    	{nuevoConjunto.add(cadena.toUpperCase());}
+    	arbolCadenas = nuevoConjunto;
 
     }
 
@@ -187,6 +188,7 @@ public class SandboxConjuntos
     public TreeSet<String> invertirCadenas( )
     {
     	TreeSet<String> arbolCadenaInvertido = new TreeSet<>(Collections.reverseOrder());
+    	arbolCadenaInvertido.addAll(arbolCadenas);
     	return arbolCadenaInvertido;
     }
 
@@ -196,9 +198,10 @@ public class SandboxConjuntos
      * @return True si todos los elementos del arreglo están dentro del conjunto
      */
     public boolean compararElementos( String[] otroArreglo )
-    {
-    	Object[] arregloCadena = arbolCadenas.toArray();
-    	return Arrays.deepEquals(arregloCadena, otroArreglo);
+    {	if (otroArreglo == null || arbolCadenas == null)
+    	{return false;}
+    	List<String> listaOtroArreglo = Arrays.asList(otroArreglo);
+    	return arbolCadenas.containsAll(listaOtroArreglo);
     }
 
 }
