@@ -266,14 +266,11 @@ public class SandboxArreglos
      */
     public int contarApariciones( int valor )
     {
-        int count = 0;
-        for (int i = 0; i<arregloEnteros.length; i++)
-        {
-        	if(arregloEnteros[i] == valor)
-        	{
-        		count += 1;
+    	int count = 0;
+        for (int i = 0; i < arregloEnteros.length; i++) 
+        	{if (arregloEnteros[i] == valor) 
+        		{count += 1;}
         	}
-        }
         return count;
     }
 
@@ -360,11 +357,10 @@ public class SandboxArreglos
     public HashMap<Integer, Integer> calcularHistograma( )
     {
     	HashMap<Integer, Integer> histograma = new HashMap<>();
-    	for(int numero = 0; numero < arregloEnteros.length; numero++)
-    	{
-    		histograma.put(numero, histograma.getOrDefault(numero, 0) + 1);
-    	}
-    	return histograma;
+        for (int valor : arregloEnteros) {
+            histograma.put(valor, histograma.getOrDefault(valor, 0) + 1);
+        }
+        return histograma;
     }
 
     /**
@@ -401,11 +397,13 @@ public class SandboxArreglos
     {	
     	if (otroArreglo == null || arregloEnteros == null) {
             return false;
-    	}
-    	if (arregloEnteros.length != otroArreglo.length) {
+        }
+        if (arregloEnteros.length != otroArreglo.length) {
             return false;
-    	}
-    	return Arrays.equals(otroArreglo, arregloEnteros);
+        }
+        return Arrays.equals(otroArreglo, arregloEnteros);
+    
+    	
     }
 
     /**
