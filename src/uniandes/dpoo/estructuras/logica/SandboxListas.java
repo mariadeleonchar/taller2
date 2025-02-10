@@ -67,6 +67,8 @@ public class SandboxListas
     public int[] getEnterosComoArreglo( )
     {
         int[] arregloEnteros = new int[listaEnteros.size()];
+        for (int i = 0; i < listaEnteros.size(); i++) 
+        	{arregloEnteros[i] = listaEnteros.get(i);}
         return arregloEnteros;
     }
 
@@ -113,10 +115,14 @@ public class SandboxListas
      * @param valor El valor que se va eliminar
      */
     public void eliminarEntero( int valor )
-    {
-    	if (listaEnteros.contains(valor))
-    	{listaEnteros.remove(valor);
-    	}
+    {	if (listaEnteros == null) 
+    		{return;}
+    	List<Integer> nuevaLista = new ArrayList<>();
+    	for (int numero : listaEnteros) 
+    		{if (numero != valor) 
+    			{nuevaLista.add(numero);}
+    		}
+    	listaEnteros = nuevaLista;
     }
 
     /**
@@ -125,9 +131,14 @@ public class SandboxListas
      */
     public void eliminarCadena( String cadena )
     {
-    	if (listaEnteros.contains(cadena))
-    	{listaEnteros.remove(cadena);
-    	}
+    	if (listaCadenas == null) 
+			{return;}
+    	List<String> nuevaLista = new ArrayList<>();
+    	for (String i : listaCadenas) 
+			{if (i != cadena) 
+				{nuevaLista.add(i);}
+			}
+    	listaCadenas = nuevaLista;
     }
 
     /**
@@ -214,8 +225,9 @@ public class SandboxListas
      * Modifica la lista de cadenas para que todos los valores queden organizados lexicográficamente.
      */
     public void organizarCadenas( )
-    {
-    	listaCadenas.sort(Comparator.reverseOrder());
+    {	if (listaCadenas == null || listaCadenas.isEmpty()) 
+    		{return;}
+    	listaCadenas.sort(null);
     }
 
     /**
@@ -246,13 +258,10 @@ public class SandboxListas
     public int contarApariciones( String cadena )
     {
     	int count = 0;
-        for (int i = 0; i < listaCadenas.size(); i++)
-        {
-        	if(listaCadenas.get(i)== cadena)
-        	{
-        		count += 1;
+        for (String i :listaCadenas)
+        	{if(i.equalsIgnoreCase(cadena))
+        		{count += 1;}
         	}
-        }
         return count;
     }
 
@@ -264,20 +273,12 @@ public class SandboxListas
     {
     	HashMap<Integer, Integer> frecuencia = new HashMap<>();
     	int count = 0;
-        for (int numero = 0; numero < listaEnteros.size(); numero++)
-        {
-        	frecuencia.put(numero, frecuencia.getOrDefault(numero, 0) + 1);
-        	{
-        		count += 1;
-        	}
-        }
-        for (int valor : frecuencia.values())
-        {
-        	if (valor> 1)
-        	{
-        		count += 1;
-        	}
-        }
+    	for (int numero : listaEnteros) 
+    		{frecuencia.put(numero, frecuencia.getOrDefault(numero, 0) + 1);}
+    	for (int valor : frecuencia.values()) 
+    		{if (valor > 1) 
+    			{count += 1;}
+    		}
         return count;
     }
 
@@ -287,8 +288,13 @@ public class SandboxListas
      * @return True si los elementos son los mismos y en el mismo orden y false de lo contrario
      */
     public boolean compararArregloEnteros( int[] otroArreglo )
-    {
-        return listaEnteros.equals(otroArreglo);
+    {	if(listaEnteros.size() != otroArreglo.length)
+    		{return false;}
+    	for (int i = 0; i < listaEnteros.size(); i++) 
+    		{if (!listaEnteros.get(i).equals(otroArreglo[i])) 
+    			{return false;}
+    		}
+    	return true;
     }
 
     /**
@@ -303,11 +309,11 @@ public class SandboxListas
      */
     public void generarEnteros( int cantidad, int minimo, int maximo )
     {
-    	List<Integer> copiaCadenas = new ArrayList<>(listaEnteros);
+    	listaEnteros.clear();
     	Random rand = new Random();
     	for (int i = 0; i < cantidad; i++) 
     	{
-            copiaCadenas.add(i, rand.nextInt((maximo - minimo) + 1) + minimo); 
+            listaEnteros.add(i, rand.nextInt((maximo - minimo) + 1) + minimo); 
         }
     }
 
